@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>SuperMrh的技术专栏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="SuperMrh的技术专栏">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="SuperMrh的技术专栏">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SuperMrh的技术专栏">
+  
+    <link rel="alternate" href="/atom.xml" title="SuperMrh的技术专栏" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">SuperMrh的技术专栏</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">学习，记忆，进步。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-flask-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/11/flask-1/" class="article-date">
+  <time datetime="2018-09-11T00:40:45.045Z" itemprop="datePublished">2018-09-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1: 创建虚拟环境（项目代码、环境分离） --&gt; virtualenv --no-site-packages flaskenv</span></span><br><span class="line"><span class="comment">#2: 创建项目文件夹</span></span><br><span class="line"><span class="comment">#3: 导入必须的库 --&gt; flask/flask_script(定制命令，管理app，python app.py runserver -h 住主机名 -p 端口号 -d(启用debug模式))/flask_blueprint(使用flask_blueprint来管理路由)</span></span><br><span class="line"><span class="comment"># 需要注意的是安装必须库的时候要激活虚拟环境 --&gt; 路径：\venv\flaskenv\Scripts\activate / \venv\flaskenv\bin\activate  激活命令： activate/source activate</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#最小的flask应用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#.1 导入flask模块</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line"><span class="comment">#.2 项目初始化，Flask类构造函数唯一需要的参数就是应用程序的主模块或包。</span></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建路由 - 在Flask应程序中定义路由的最便捷的方式是通过显示定义在应用程序实例之上的app.route装饰器，注册被装饰的函数来作为一个 路由</span></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="comment"># 视图函数 - controller</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gello_world</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">return</span> <span class="string">'Hello World'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment"># app.run(debug=True, host='127.0.0.1', port=5000)</span></span><br><span class="line">    <span class="comment"># 使用flask_script来管理app后，启动的设置可以设置在启动命令里面</span></span><br><span class="line">    <span class="comment"># python app.py runserver -h 127.0.0.1 -p 5000 -d</span></span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+<h2 id="项目拆分"><a href="#项目拆分" class="headerlink" title="项目拆分"></a>项目拆分</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一般来说，我们完全可以将所有的代码写在一个文件里面，一个文件实现所有需要的功能，但是这样的话，代码的复用性和可维护性都相当差，所以实际开发的时候我们会把视图函数独立出来。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#.1 创建一个app的文件夹，在里面创建一个views.py文件（mvc结构模型）,将视图函数写在里面。</span></span><br><span class="line"><span class="comment">#.2 项目拆分了之后，我们就不能再去使用app.route()去管理路由,即使在views.py文件里面导入了app也不行，所以我们需要用到flask_blueprint（蓝图）去管理路由</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化蓝图</span></span><br><span class="line">hello_blueprint = Blueprint(<span class="string">'first'</span>, __name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化蓝图后，在项目主文件里面需要注册</span></span><br><span class="line"><span class="comment"># 在views中定义完blueprint后，需要在项目主文件中注册</span></span><br><span class="line">app.register_blueprint(hello_blueprint, url_prefix=<span class="string">'/app/'</span>)  <span class="comment"># url_prefix相当于django里面的namespace</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 请求方式默认为'GET',可以指定url允许的请求方式  </span></span><br><span class="line"><span class="meta">@hello_blueprint.route('/postName', methods=['POST', 'GET'])</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 参数获取</span></span><br><span class="line"><span class="meta">@hello_blueprint.route('/hello')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'hello, %s!'</span> % <span class="string">'Nancy'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># methods里面传递url允许的请求方式</span></span><br><span class="line"><span class="meta">@hello_blueprint.route('/postName', methods=['POST', 'GET'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">post_name</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'我是GET请求'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认接收到的参数为string类型，接收string类型参数的时候，string可以省略</span></span><br><span class="line"><span class="meta">@hello_blueprint.route('/getName/&lt;string:name&gt;', methods=['POST', 'GET', 'PUT'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_name</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'我是%s'</span> % name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 接收其他类型的参数必须制定参数的类型</span></span><br><span class="line"><span class="meta">@hello_blueprint.route('/getID/&lt;int:ID&gt;', methods=['POST', 'GET', 'PUT'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_id</span><span class="params">(ID)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'我的ID是%d'</span> % ID</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 接收浮点数，%.3f 格式化浮点数，保留3为小数</span></span><br><span class="line"><span class="meta">@hello_blueprint.route('/getFloat/&lt;float:fid&gt;', methods=['POST', 'GET', 'PUT'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_float</span><span class="params">(fid)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'浮点数：%.3f'</span> % fid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化输出  %s --&gt; "".format() --&gt; f'&#123;a&#125;&#123;b&#125;'</span></span><br><span class="line"><span class="meta">@hello_blueprint.route('/getPath/&lt;path:path&gt;', methods=['POST', 'GET', 'PUT'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_path</span><span class="params">(path)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'路径：%s'</span> % path</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@hello_blueprint.route('/getUuid', methods=['POST', 'GET', 'PUT'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_uuid</span><span class="params">()</span>:</span></span><br><span class="line">    uid = uuid4()</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'uid：%s'</span> % uid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@hello_blueprint.route('/getUid/&lt;uuid:uid&gt;', methods=['POST', 'GET', 'PUT'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_uid</span><span class="params">(uid)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'uid：%s'</span> % uid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@hello_blueprint.route('/makeResponse')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_response</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># res.set_cookie()</span></span><br><span class="line">    res = make_response(<span class="string">'&lt;h2&gt;我是响应&lt;/h2&gt;'</span>, <span class="number">202</span>)  <span class="comment"># 可以绑定响应状态码</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h2 id="flask-django的差异"><a href="#flask-django的差异" class="headerlink" title="flask/django的差异"></a>flask/django的差异</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当请求方式为GET的时候，flask获取参数的位置是：request.args  django是request.GET</span></span><br><span class="line"><span class="comment"># 当请求方式为POST/PUT/PUTCH等的时候，flask获取参数的位置是：request.form  django是request.POST</span></span><br></pre></td></tr></table></figure>
+<h2 id="route规则"><a href="#route规则" class="headerlink" title="route规则"></a>route规则</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">写法：converter:variable_name</span><br><span class="line"></span><br><span class="line">converter类型：</span><br><span class="line">string 字符串</span><br><span class="line">int 整形</span><br><span class="line">float 浮点型</span><br><span class="line">path 接受路径，接收的时候是str，/也当做字符串的一个字符</span><br><span class="line">uuid 只接受uuid字符串</span><br><span class="line">any 可以同时指定多种路径，进行限定 、、、</span><br></pre></td></tr></table></figure>
+<h2 id="methods请求方法"><a href="#methods请求方法" class="headerlink" title="methods请求方法"></a>methods请求方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET : 获取</span><br><span class="line">POST : 创建</span><br><span class="line">PUT : 修改(全部属性都修改)</span><br><span class="line">DELETE : 删除</span><br><span class="line">PATCH : 修改(修改部分属性)等等、、、</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/11/flask-1/" data-id="cjlwzqa4n00005wks4heysnnf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/11/hello-world/" class="article-date">
+  <time datetime="2018-09-10T23:45:30.286Z" itemprop="datePublished">2018-09-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/11/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/11/hello-world/" data-id="cjlwz2zdk000088ksieh9quzk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/11/flask-1/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/11/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 SuperMrh<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
